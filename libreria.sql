@@ -8,39 +8,39 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema libreria
+-- Schema library
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema libreria
+-- Schema library
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `libreria` DEFAULT CHARACTER SET utf8 ;
-USE `libreria` ;
+CREATE SCHEMA IF NOT EXISTS `library` DEFAULT CHARACTER SET utf8 ;
+USE `library` ;
 
 -- -----------------------------------------------------
--- Table `libreria`.`coleccion`
+-- Table `library`.`collection`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `libreria`.`coleccion` (
+CREATE TABLE IF NOT EXISTS `library`.`collection` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `libreria`.`comic`
+-- Table `library`.`comic`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `libreria`.`comic` (
+CREATE TABLE IF NOT EXISTS `library`.`comic` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `data_compra` DATE NOT NULL,
-  `tapa` ENUM('blanda', 'dura') NOT NULL,
-  `estado` ENUM('roto', 'marcado', 'buen estado', 'como nuevo') NOT NULL,
-  `id_coleccion` INT NOT NULL,
+  `buy_date` DATE NOT NULL,
+  `cover` ENUM('hard', 'soft') NOT NULL,
+  `condition` ENUM('broken', 'marked', 'good condition', 'new') NOT NULL,
+  `id_collection` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_comic_coleccion_idx` (`id_coleccion` ASC) VISIBLE,
-  CONSTRAINT `fk_comic_coleccion`
-    FOREIGN KEY (`id_coleccion`)
-    REFERENCES `libreria`.`coleccion` (`id`)
+  INDEX `fk_comic_collection_idx` (`id_collection` ASC) VISIBLE,
+  CONSTRAINT `fk_comic_collection`
+    FOREIGN KEY (`id_collection`)
+    REFERENCES `library`.`collection` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
