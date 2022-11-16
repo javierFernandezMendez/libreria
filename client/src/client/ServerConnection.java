@@ -32,7 +32,7 @@ public class ServerConnection {
         }
     }
     
-    protected String query(String data){
+    public String query(String data){
         try {
             out.writeUTF(data);
             return in.readUTF();

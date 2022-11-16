@@ -22,7 +22,7 @@ public class Main {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/library", "root", "root");
-            Server server = new Server(10);
+            Server server = new Server(10, connection);
             server.run();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
