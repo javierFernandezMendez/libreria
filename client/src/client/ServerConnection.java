@@ -22,9 +22,7 @@ public class ServerConnection {
     
     public ServerConnection(int port) {
         try {
-            //Creo el socket para conectarme con el cliente
             sc = new Socket("127.0.0.1", port);
-            System.out.println("Conexion con servidor establecida!");
             out = new DataOutputStream(sc.getOutputStream());
             in = new DataInputStream(sc.getInputStream());
         } catch (IOException ex) {

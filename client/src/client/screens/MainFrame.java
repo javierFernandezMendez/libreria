@@ -17,7 +17,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        sc = new ServerConnection(10);
+        
     }
 
     /**
@@ -61,7 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Collections(this, false, sc).setVisible(true);
+        new Collections(this, false).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

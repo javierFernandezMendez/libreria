@@ -20,44 +20,31 @@ import java.util.logging.Logger;
  *
  * @author chivu
  */
-public class Server implements Runnable{
-    private ServerSocket socket;
+public class Server{
+    private ServerSocket serverSocket;
     private Connection connection;
+    private Socket socket;
+    private String clientMsg = "";
     
-    Server(int puerto, Connection connection){
+    Server(Connection connection, ServerSocket serverSocket){
         this.connection = connection;
-        try {
-            socket = new ServerSocket(puerto);
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.serverSocket = serverSocket;
+        recieveClients();
     }
 
-    @Override
-    public void run() {
+    private void recieveClients(){
         try {
-            Socket sc;
-            String clientMsg;
-            Statement st;
             do{
-            sc = socket.accept();
-            clientMsg = new DataInputStream(sc.getInputStream()).readUTF();
-            System.out.println(clientMsg);
-            st = this.connection.createStatement();
-            ResultSet rs = st.executeQuery(clientMsg);
-            String data = "";
-            while(rs.next()){
-                data = data + String.valueOf(rs.getInt("id")) + "," + rs.getString("name") + ";";
+                socket = serverSocket.accept();
+                clientMsg = new DataInputStream(socket.getInputStream()).readUTF();
+                ServerThread thread = new ServerThread(connection, socket, clientMsg);
+                thread.run();
             }
-            new DataOutputStream(sc.getOutputStream()).writeUTF(data);
-            }
-            while(!clientMsg.equals("close"));
-            sc.close();
+            while(!clientMsg.equals("quit"));
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
+
 }

@@ -18,10 +18,10 @@ public class Collections extends javax.swing.JDialog {
     /**
      * Creates new form Collections
      */
-    public Collections(java.awt.Frame parent, boolean modal, ServerConnection sc) {
+    public Collections(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.sc = sc;
+        sc = new ServerConnection(10);
         tableModel.addColumn("ID");
         tableModel.addColumn("Nombre");
         loadData();

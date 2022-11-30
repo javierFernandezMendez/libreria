@@ -4,6 +4,8 @@
  */
 package server;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,9 +24,12 @@ public class Main {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/library", "root", "root");
-            Server server = new Server(10, connection);
-            server.run();
-        } catch (ClassNotFoundException ex) {
+            ServerSocket socket = new ServerSocket(10);
+            Server server = new Server(connection, socket);
+        } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (ClassNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
