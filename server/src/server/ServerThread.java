@@ -37,11 +37,23 @@ public class ServerThread implements Runnable {
             st = this.connection.createStatement();
             ResultSet rs = st.executeQuery(clientMsg);
             String data = "";
+
             while (rs.next()) {
-                data = data + String.valueOf(rs.getInt("id")) + "," + rs.getString("name") + ";";
+                try{
+                    int cont = 1;
+                    while(true){
+                        data = data + String.valueOf(rs.getString(cont)) + ",";
+                        cont ++;
+                    }
+                }
+                catch(Exception e){
+                    data = data + ";";
+                    System.out.println(e.getMessage());
+                }
             }
+
             new DataOutputStream(socket.getOutputStream()).writeUTF(data);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

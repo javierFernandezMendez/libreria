@@ -32,6 +32,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `library`.`comic` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(45) NOT NULL,
+  `author` VARCHAR(45) NOT NULL,
   `buy_date` DATE NOT NULL,
   `cover` ENUM('hard', 'soft') NOT NULL,
   `condition` ENUM('broken', 'marked', 'good condition', 'new') NOT NULL,

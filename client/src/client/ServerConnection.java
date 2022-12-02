@@ -20,14 +20,11 @@ public class ServerConnection {
     private static DataOutputStream out;
     private static DataInputStream in;
     
-    public ServerConnection(int port) {
-        try {
-            sc = new Socket("127.0.0.1", port);
-            out = new DataOutputStream(sc.getOutputStream());
-            in = new DataInputStream(sc.getInputStream());
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+    public ServerConnection(int port) throws IOException {
+        sc = new Socket("127.0.0.1", port);
+        out = new DataOutputStream(sc.getOutputStream());
+        in = new DataInputStream(sc.getInputStream());
+        
     }
     
     public String query(String data){

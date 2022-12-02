@@ -5,37 +5,59 @@
 package client.screens;
 
 import client.ServerConnection;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author chivu
  */
-public class Collections extends javax.swing.JDialog {
+public class ShowComics extends javax.swing.JDialog {
 
     private ServerConnection sc;
 
     /**
      * Creates new form Collections
      */
-    public Collections(java.awt.Frame parent, boolean modal) {
+    public ShowComics(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        sc = new ServerConnection(10);
+        try {
+            sc = new ServerConnection(10);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 0);
+            this.dispose();
+        }
         tableModel.addColumn("ID");
-        tableModel.addColumn("Nombre");
+        tableModel.addColumn("Titulo");
+        tableModel.addColumn("Autor");
+        tableModel.addColumn("Fecha compra");
+        tableModel.addColumn("Tapa");
+        tableModel.addColumn("Estado");
+        tableModel.addColumn("ID coleccion");
         loadData();
     }
 
     private void loadData() {
-        String data = sc.query("select * from collection;");
-        if (data != null) {
+        String data = sc.query("select * from comic;");
+        if (data != "") {
             for (int i = 0; i < data.split(";").length; i++) {
                 tableModel.setRowCount(tableModel.getRowCount() + 1);
                 tableModel.setValueAt(data.split(";")[i].split(",")[0], tableModel.getRowCount() - 1, 0);
                 tableModel.setValueAt(data.split(";")[i].split(",")[1], tableModel.getRowCount() - 1, 1);
-
+                tableModel.setValueAt(data.split(";")[i].split(",")[2], tableModel.getRowCount() - 1, 2);
+                tableModel.setValueAt(data.split(";")[i].split(",")[3], tableModel.getRowCount() - 1, 3);
+                tableModel.setValueAt(data.split(";")[i].split(",")[4], tableModel.getRowCount() - 1, 4);
+                tableModel.setValueAt(data.split(";")[i].split(",")[5], tableModel.getRowCount() - 1, 5);
+                tableModel.setValueAt(data.split(";")[i].split(",")[6], tableModel.getRowCount() - 1, 6);
+                
             }
+        }
+        else{
+           JOptionPane.showMessageDialog(this, "No existen resultados en la base de datos.");
         }
     }
 
@@ -73,7 +95,8 @@ public class Collections extends javax.swing.JDialog {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(416, 308));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
