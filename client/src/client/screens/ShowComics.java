@@ -16,14 +16,16 @@ import javax.swing.table.DefaultTableModel;
  * @author chivu
  */
 public class ShowComics extends javax.swing.JDialog {
-
+    private java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("client/i18n/LabelsBundle");
     private ServerConnection sc;
-
+    private java.awt.Frame parent;
+    
     /**
      * Creates new form Collections
      */
     public ShowComics(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
         try {
             sc = new ServerConnection(10);
@@ -32,12 +34,12 @@ public class ShowComics extends javax.swing.JDialog {
             this.dispose();
         }
         tableModel.addColumn("ID");
-        tableModel.addColumn("Titulo");
+        tableModel.addColumn("Título");
         tableModel.addColumn("Autor");
-        tableModel.addColumn("Fecha compra");
-        tableModel.addColumn("Tapa");
+        tableModel.addColumn(bundle.getString("fecha_compra"));
+        tableModel.addColumn(bundle.getString("tapa"));
         tableModel.addColumn("Estado");
-        tableModel.addColumn("ID coleccion");
+        tableModel.addColumn("ID colección");
         loadData();
     }
 
@@ -57,10 +59,18 @@ public class ShowComics extends javax.swing.JDialog {
             }
         }
         else{
-           JOptionPane.showMessageDialog(this, "No existen resultados en la base de datos.");
+           JOptionPane.showMessageDialog(this, bundle.getString("sin_resultados"));
         }
     }
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
+        try {
+            this.sc.close();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this.parent, ex.getMessage());
+        }
+    } 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,28 +84,16 @@ public class ShowComics extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("client/i18n/LabelsBundle"); // NOI18N
+        setTitle(bundle.getString("show_comics")); // NOI18N
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
+        getContentPane().add(jScrollPane1);
 
-        setSize(new java.awt.Dimension(416, 308));
+        setSize(new java.awt.Dimension(716, 308));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

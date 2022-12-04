@@ -5,13 +5,16 @@
 package client.screens;
 
 import client.ServerConnection;
+import java.util.Locale;
 
 /**
  *
  * @author chivu
  */
 public class MainFrame extends javax.swing.JFrame {
-    private ServerConnection sc;
+    final Locale glLocale = new Locale("gl","ES");
+    final Locale esLocale = new Locale("es","ES");
+
     /**
      * Creates new form MainFrame
      */
@@ -31,55 +34,87 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        menuES = new javax.swing.JMenuItem();
+        menuGAL = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("client/i18n/LabelsBundle"); // NOI18N
+        setTitle(bundle.getString("main_frame")); // NOI18N
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setText("Colecciones");
+        jButton1.setText(bundle.getString("colecciones")); // NOI18N
+        jButton1.setLabel(bundle.getString("colecciones")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
 
-        jButton2.setText("Comics");
+        jButton2.setText(bundle.getString("comics")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jButton1)
-                .addGap(76, 76, 76)
-                .addComponent(jButton2)
-                .addContainerGap(123, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(233, Short.MAX_VALUE))
-        );
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+
+        jMenu3.setText("Idioma");
+
+        menuES.setText("Castellano");
+        menuES.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuESActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuES);
+
+        menuGAL.setText("Gallego");
+        menuGAL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGALActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuGAL);
+
+        jMenu2.add(jMenu3);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         setSize(new java.awt.Dimension(416, 308));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new ShowCollections(this, false).setVisible(true);
+        new MenuCollections(this, false).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new ShowComics(this, false).setVisible(true);
+        new MenuComics(this, false).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void menuGALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGALActionPerformed
+        Locale.setDefault(glLocale);
+        this.dispose();
+        new MainFrame().setVisible(true);
+    }//GEN-LAST:event_menuGALActionPerformed
+
+    private void menuESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuESActionPerformed
+        Locale.setDefault(esLocale);
+        this.dispose();
+        new MainFrame().setVisible(true);
+    }//GEN-LAST:event_menuESActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,5 +154,11 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menuES;
+    private javax.swing.JMenuItem menuGAL;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,8 +36,7 @@ public class Server{
         try {
             do{
                 socket = serverSocket.accept();
-                clientMsg = new DataInputStream(socket.getInputStream()).readUTF();
-                ServerThread thread = new ServerThread(connection, socket, clientMsg);
+                ServerThread thread = new ServerThread(connection, socket);
                 thread.run();
             }
             while(!clientMsg.equals("quit"));

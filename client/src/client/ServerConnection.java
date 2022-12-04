@@ -37,4 +37,19 @@ public class ServerConnection {
         return null;
     }
     
+    public boolean insert(String data){
+        try {
+            out.writeUTF(data);
+            return true;
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
+    
+    public void close() throws IOException{
+        out.writeUTF("close");
+        sc.close();
+    }
+    
 }

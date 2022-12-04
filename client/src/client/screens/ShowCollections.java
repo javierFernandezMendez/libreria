@@ -16,23 +16,26 @@ import javax.swing.table.DefaultTableModel;
  * @author chivu
  */
 public class ShowCollections extends javax.swing.JDialog {
-
+    
+    private java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("client/i18n/LabelsBundle");
     private ServerConnection sc;
-
+    private java.awt.Frame parent;
+    
     /**
      * Creates new form Collections
      */
     public ShowCollections(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
         try {
             sc = new ServerConnection(10);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 0);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), bundle.getString("error"), 0);
             this.dispose();
         }
         tableModel.addColumn("ID");
-        tableModel.addColumn("Nombre");
+        tableModel.addColumn(bundle.getString("nombre"));
         loadData();
     }
 
@@ -47,7 +50,15 @@ public class ShowCollections extends javax.swing.JDialog {
             }
         }
         else{
-           JOptionPane.showMessageDialog(this, "No existen resultados en la base de datos.");
+           JOptionPane.showMessageDialog(this, bundle.getString("sin_resultados"));
+        }
+    }
+    
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
+        try {
+            this.sc.close();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this.parent, ex.getMessage());
         }
     }
 
@@ -64,26 +75,14 @@ public class ShowCollections extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("client/i18n/LabelsBundle"); // NOI18N
+        setTitle(bundle.getString("show_colecciones")); // NOI18N
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
+        getContentPane().add(jScrollPane1);
 
         setSize(new java.awt.Dimension(416, 308));
         setLocationRelativeTo(null);

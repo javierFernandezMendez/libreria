@@ -4,6 +4,7 @@
  */
 package server;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -24,36 +25,38 @@ public class ServerThread implements Runnable {
     private Socket socket;
     private String clientMsg;
 
-    public ServerThread(Connection connection, Socket socket, String clientMsg) {
+    public ServerThread(Connection connection, Socket socket) {
         this.connection = connection;
         this.socket = socket;
-        this.clientMsg = clientMsg;
     }
 
     @Override
     public void run() {
         Statement st;
         try {
+            clientMsg = new DataInputStream(socket.getInputStream()).readUTF();
             st = this.connection.createStatement();
-            ResultSet rs = st.executeQuery(clientMsg);
-            String data = "";
+            if (clientMsg.startsWith("select")) {
+                ResultSet rs = st.executeQuery(clientMsg);
+                String data = "";
 
-            while (rs.next()) {
-                try{
-                    int cont = 1;
-                    while(true){
-                        data = data + String.valueOf(rs.getString(cont)) + ",";
-                        cont ++;
+                while (rs.next()) {
+                    try {
+                        int cont = 1;
+                        while (true) {
+                            data = data + String.valueOf(rs.getString(cont)) + ",";
+                            cont++;
+                        }
+                    } catch (Exception e) {
+                        data = data + ";";
                     }
                 }
-                catch(Exception e){
-                    data = data + ";";
-                    System.out.println(e.getMessage());
-                }
+
+                new DataOutputStream(socket.getOutputStream()).writeUTF(data);
             }
-
-            new DataOutputStream(socket.getOutputStream()).writeUTF(data);
-
+            else if(clientMsg.startsWith("insert")){
+                st.executeUpdate(clientMsg);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
