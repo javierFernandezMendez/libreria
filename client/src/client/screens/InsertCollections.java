@@ -64,6 +64,7 @@ public class InsertCollections extends javax.swing.JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 20);
         getContentPane().add(jLabel1, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -133,7 +134,6 @@ public class InsertCollections extends javax.swing.JDialog {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         try {
-            
             this.sc.close();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this.parent, ex.getMessage());

@@ -39,8 +39,7 @@ public class ShowCollections extends javax.swing.JDialog {
         loadData();
     }
 
-    private void loadData() {
-        String data = sc.query("select * from collection;");
+    private void loadData() {String data = sc.query("select * from collection;");
         if (data != "") {
             for (int i = 0; i < data.split(";").length; i++) {
                 tableModel.setRowCount(tableModel.getRowCount() + 1);
@@ -52,6 +51,7 @@ public class ShowCollections extends javax.swing.JDialog {
         else{
            JOptionPane.showMessageDialog(this, bundle.getString("sin_resultados"));
         }
+        
     }
     
     private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
