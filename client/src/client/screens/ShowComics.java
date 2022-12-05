@@ -30,7 +30,7 @@ public class ShowComics extends javax.swing.JDialog {
         try {
             sc = new ServerConnection(10);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", 0);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), bundle.getString("error"), 0);
             this.dispose();
         }
         tableModel.addColumn("ID");
@@ -62,14 +62,6 @@ public class ShowComics extends javax.swing.JDialog {
            JOptionPane.showMessageDialog(this, bundle.getString("sin_resultados"));
         }
     }
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
-        try {
-            this.sc.close();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this.parent, ex.getMessage());
-        }
-    } 
     
     /**
      * This method is called from within the constructor to initialize the form.

@@ -39,7 +39,8 @@ public class ShowCollections extends javax.swing.JDialog {
         loadData();
     }
 
-    private void loadData() {String data = sc.query("select * from collection;");
+    private void loadData() {
+        String data = sc.query("select * from collection;");
         if (data != "") {
             for (int i = 0; i < data.split(";").length; i++) {
                 tableModel.setRowCount(tableModel.getRowCount() + 1);
@@ -54,14 +55,6 @@ public class ShowCollections extends javax.swing.JDialog {
         
     }
     
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
-        try {
-            this.sc.close();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this.parent, ex.getMessage());
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

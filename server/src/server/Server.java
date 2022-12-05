@@ -24,7 +24,6 @@ public class Server{
     private ServerSocket serverSocket;
     private Connection connection;
     private Socket socket;
-    private String clientMsg = "";
     
     Server(Connection connection, ServerSocket serverSocket){
         this.connection = connection;
@@ -36,12 +35,13 @@ public class Server{
         try {
             do{
                 socket = serverSocket.accept();
-                ServerThread thread = new ServerThread(connection, socket);
-                thread.run();
+                //ServerThread thread = new ServerThread(connection, socket);
+                Thread t = new Thread(new ServerThread(connection, socket));
+                t.start();
             }
-            while(!clientMsg.equals("quit"));
+            while(true);
         } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         
     }

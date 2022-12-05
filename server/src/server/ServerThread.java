@@ -34,33 +34,35 @@ public class ServerThread implements Runnable {
     public void run() {
         Statement st;
         try {
-            clientMsg = new DataInputStream(socket.getInputStream()).readUTF();
-            st = this.connection.createStatement();
-            if (clientMsg.startsWith("select")) {
-                ResultSet rs = st.executeQuery(clientMsg);
-                String data = "";
-
-                while (rs.next()) {
-                    try {
-                        int cont = 1;
-                        while (true) {
-                            data = data + String.valueOf(rs.getString(cont)) + ",";
-                            cont++;
+            do {
+                clientMsg = new DataInputStream(socket.getInputStream()).readUTF();
+                st = this.connection.createStatement();
+                if (clientMsg.startsWith("select")) {
+                    ResultSet rs = st.executeQuery(clientMsg);
+                    String data = "";
+                    while (rs.next()) {
+                        try {
+                            int cont = 1;
+                            while (true) {
+                                data = data + String.valueOf(rs.getString(cont)) + ",";
+                                cont++;
+                            }
+                        } catch (Exception e) {
+                            data = data + ";";
                         }
-                    } catch (Exception e) {
-                        data = data + ";";
                     }
+                    new DataOutputStream(socket.getOutputStream()).writeUTF(data);
+                    
+                } else if (clientMsg.startsWith("insert")) {
+                    st.executeUpdate(clientMsg);
                 }
-
-                new DataOutputStream(socket.getOutputStream()).writeUTF(data);
-            }
-            else if(clientMsg.startsWith("insert")){
-                st.executeUpdate(clientMsg);
-            }
+            } 
+            while (!clientMsg.equals("close"));
+            
         } catch (SQLException ex) {
-            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
 

@@ -63,12 +63,7 @@ public class InsertComics extends javax.swing.JDialog {
         dpBuyDate = new org.jdatepicker.JDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Crear colección");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        setTitle("Crear cómic");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Datos cómics:");
@@ -214,6 +209,10 @@ public class InsertComics extends javax.swing.JDialog {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.txtfTitle.setText("");
+        this.txtfAuthor.setText("");
+        this.cmbColection.setSelectedIndex(0);
+        this.cmbCondition.setSelectedIndex(0);
+        this.cmbCover.setSelectedIndex(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -241,22 +240,18 @@ public class InsertComics extends javax.swing.JDialog {
                 condition = "new";
             }
             if(sc.insert("insert into comic values (null, '" + txtfTitle.getText() + "','" 
-                    + txtfAuthor.getText() + "','" + date + "','" + cover + "'" + condition + "'," + cmbColection.getSelectedItem().toString() + ");")){
-                JOptionPane.showMessageDialog(this.parent, "Colección insertada con éxito");
+                    + txtfAuthor.getText() + "','" + date + "','" + cover + "','" + condition + "'," + cmbColection.getSelectedItem().toString().split(",")[0] + ");")){
+                JOptionPane.showMessageDialog(this.parent, "Cómic insertado con éxito");
+            }
+            else{
+                JOptionPane.showMessageDialog(parent, "Fallo insertando");
+                this.dispose();
             }
         }
         else{
             JOptionPane.showMessageDialog(this.parent, bundle.getString("rellenar_campos"));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        try {
-            this.sc.close();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this.parent, ex.getMessage());
-        }
-    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
