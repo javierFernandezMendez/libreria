@@ -58,6 +58,11 @@ public class MenuCollections extends javax.swing.JDialog {
         getContentPane().add(jSeparator1);
 
         jButton2.setText(bundle.getString("baja")); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2);
 
         jSeparator2.setForeground(new java.awt.Color(242, 242, 242));
@@ -91,6 +96,10 @@ public class MenuCollections extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new InsertCollections(this.parent, false).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new DeleteCollection(this.parent, false).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -198,7 +198,7 @@ public class InsertComics extends javax.swing.JDialog {
         String data = sc.query("select * from collection;");
         if (data != "") {
             for (int i = 0; i < data.split(";").length; i++) {
-                comboCollectionsModel.addElement(data.split(";")[i]);
+                comboCollectionsModel.addElement(data.split(";")[i].substring(0, data.split(";")[i].length()-1));
             }
         }
         else{

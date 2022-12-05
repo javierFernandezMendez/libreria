@@ -55,12 +55,22 @@ public class ServerThread implements Runnable {
                     
                 } else if (clientMsg.startsWith("insert")) {
                     st.executeUpdate(clientMsg);
+                } else if (clientMsg.startsWith("delete")) {
+                    st.executeUpdate(clientMsg);
+                    new DataOutputStream(socket.getOutputStream()).writeUTF("deleted");
                 }
             } 
             while (!clientMsg.equals("close"));
             
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            if(ex.getErrorCode() == 1451){
+                try {
+                    new DataOutputStream(socket.getOutputStream()).writeUTF("not deleted cause of foreing key");
+                } catch (IOException ex1) {
+                    System.out.println(ex.getMessage());
+                }
+            }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
