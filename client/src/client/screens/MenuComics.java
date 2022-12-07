@@ -37,6 +37,8 @@ public class MenuComics extends javax.swing.JDialog {
         jSeparator3 = new javax.swing.JSeparator();
         jButton4 = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
+        jButton5 = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("client/i18n/LabelsBundle"); // NOI18N
@@ -90,7 +92,16 @@ public class MenuComics extends javax.swing.JDialog {
         jSeparator4.setForeground(new java.awt.Color(242, 242, 242));
         getContentPane().add(jSeparator4);
 
-        setSize(new java.awt.Dimension(416, 308));
+        jButton5.setText("Busqueda");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5);
+        getContentPane().add(jSeparator6);
+
+        setSize(new java.awt.Dimension(493, 308));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -109,6 +120,10 @@ public class MenuComics extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         new ModifyComic(this.parent, false).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        new FindComics(this.parent, false).setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,10 +172,12 @@ public class MenuComics extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     // End of variables declaration//GEN-END:variables
 }
