@@ -69,6 +69,11 @@ public class MenuComics extends javax.swing.JDialog {
         getContentPane().add(jSeparator2);
 
         jButton3.setText("Modificación");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
 
         jSeparator3.setForeground(new java.awt.Color(242, 242, 242));
@@ -100,6 +105,10 @@ public class MenuComics extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new DeleteComic(this.parent, false).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new ModifyComic(this.parent, false).setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

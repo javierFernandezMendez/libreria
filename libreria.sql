@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `library`.`comic` (
   `author` VARCHAR(45) NOT NULL,
   `buy_date` DATE NOT NULL,
   `cover` ENUM('hard', 'soft') NOT NULL,
-  `condition` ENUM('broken', 'marked', 'good condition', 'new') NOT NULL,
+  `health` ENUM('broken', 'marked', 'good condition', 'new') NOT NULL,
   `id_collection` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_comic_collection_idx` (`id_collection` ASC) VISIBLE,

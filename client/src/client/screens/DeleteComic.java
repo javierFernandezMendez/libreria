@@ -32,10 +32,10 @@ public class DeleteComic extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.getMessage(), bundle.getString("error"), 0);
             this.dispose();
         }
-        fillCollectionsCombo();
+        fillComicsCombo();
     }
 
-    private void fillCollectionsCombo() {
+    private void fillComicsCombo() {
         comboCollectionsModel.removeAllElements();
         String data = sc.query("select * from comic;");
         if (data != "") {
@@ -104,7 +104,7 @@ public class DeleteComic extends javax.swing.JDialog {
         String deleteMessage = sc.delete("delete from comic where id = " + ((String) comboCollectionsModel.getSelectedItem()).split(",")[0] + ";");
         if (deleteMessage.equals("deleted")) {
             JOptionPane.showMessageDialog(parent, "Cómic eliminado con éxito");
-            fillCollectionsCombo();
+            fillComicsCombo();
         } else {
             JOptionPane.showMessageDialog(parent, bundle.getString("error_borrado"));
         }

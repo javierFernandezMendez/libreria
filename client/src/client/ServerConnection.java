@@ -54,9 +54,18 @@ public class ServerConnection {
         return null;
     }
     
+    public String update(String data){
+        try {
+            out.writeUTF(data);
+            return in.readUTF();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+    
     public void close() throws IOException{
         out.writeUTF("close");
-        sc.close();
     }
     
 }
