@@ -4,7 +4,13 @@
  */
 package client.screens;
 
+import java.net.URL;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.help.HelpSetException;
 
 /**
  *
@@ -13,13 +19,24 @@ import java.util.Locale;
 public class MainFrame extends javax.swing.JFrame {
     final Locale glLocale = new Locale("gl","ES");
     final Locale esLocale = new Locale("es","ES");
-
+    public static HelpSet HELPSET;
+    public static HelpBroker BROKER;
+    
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
-        initComponents();
-        
+        try {
+            initComponents();
+            
+            URL url = this.getClass().getResource("/help/ayuda.hs");
+            HELPSET = new HelpSet(null, url);
+            BROKER = HELPSET.createHelpBroker();
+            BROKER.enableHelpOnButton(menuHelp, "index", HELPSET);
+            
+        } catch (HelpSetException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**
@@ -40,6 +57,8 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         menuES = new javax.swing.JMenuItem();
         menuGAL = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        menuHelp = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("client/i18n/LabelsBundle"); // NOI18N
@@ -98,6 +117,13 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu2.add(jMenu3);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu4.setText(bundle.getString("ayuda")); // NOI18N
+
+        menuHelp.setText(bundle.getString("ayuda")); // NOI18N
+        jMenu4.add(menuHelp);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -170,9 +196,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem menuES;
     private javax.swing.JMenuItem menuGAL;
+    private javax.swing.JMenuItem menuHelp;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<map version="1.0">  
+    <mapID target="index" url="html/index.html"/>
+    <mapID target="menu-comics" url="html/menuComics.html"/>
+    <mapID target="alta-comics" url="html/altaComics.html"/>
+    <mapID target="baja-comics" url="html/bajaComics.html"/>
+    <mapID target="modificacion-comics" url="html/modificacionComics.html"/>
+    <mapID target="listado-comics" url="html/listadoComics.html"/>
+    <mapID target="busqueda-comics" url="html/busquedaComics.html"/>
+    <mapID target="menu-collections" url="html/menuCollections.html"/>
+    <mapID target="alta-colecciones" url="html/altaColecciones.html"/>
+    <mapID target="baja-colecciones" url="html/bajaColecciones.html"/>
+    <mapID target="modificacion-colecciones" url="html/modificacionColecciones.html"/>
+    <mapID target="listado-colecciones" url="html/listadoColecciones.html"/>
+    <mapID target="informes" url="html/informes.html"/>
+    <mapID target="idioma" url="html/idioma.html"/>
+</map>

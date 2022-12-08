@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc version="1.0">  
+    <tocitem text="Panel principal" target="index" expand="true">
+        <tocitem text="Menu comics" target="menu-comics" expand="true">
+            <tocitem text="Alta" target="alta-comics" expand="false"/>
+            <tocitem text="Baja" target="baja-comics" expand="false"/>
+            <tocitem text="Modificacion" target="modificacion-comics" expand="false"/>
+            <tocitem text="Listado" target="listado-comics" expand="false"/>
+            <tocitem text="Busqueda" target="busqueda-comics" expand="false"/>
+        </tocitem>
+        <tocitem text="Menu colecciones" target="menu-collections" expand="true">
+            <tocitem text="Alta" target="alta-colecciones" expand="false"/>
+            <tocitem text="Baja" target="baja-colecciones" expand="false"/>
+            <tocitem text="Modificacion" target="modificacion-colecciones" expand="false"/>
+            <tocitem text="Listado" target="listado-colecciones" expand="false"/>
+        </tocitem>
+        <tocitem text="Informes" target="informes" expand="false"/>
+        <tocitem text="Cambio idioma" target="idioma" expand="false"/>
+    </tocitem>
+</toc> 
