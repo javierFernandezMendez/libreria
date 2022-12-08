@@ -78,6 +78,11 @@ public class ModifyCollection extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificar colección");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Colección:");
@@ -176,6 +181,10 @@ public class ModifyCollection extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(parent, bundle.getString("error_actualizado_foreing_key"));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        sc.close();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

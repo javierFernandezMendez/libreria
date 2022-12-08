@@ -52,6 +52,11 @@ public class InsertCollections extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Crear colección");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Datos colección:");
@@ -126,6 +131,10 @@ public class InsertCollections extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this.parent, bundle.getString("rellenar_campos"));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        sc.close();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

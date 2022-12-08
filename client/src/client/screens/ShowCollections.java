@@ -41,7 +41,7 @@ public class ShowCollections extends javax.swing.JDialog {
 
     private void loadData() {
         String data = sc.query("select * from collection;");
-        if (data != "") {
+        if (!data.equals("")) {
             for (int i = 0; i < data.split(";").length; i++) {
                 tableModel.setRowCount(tableModel.getRowCount() + 1);
                 tableModel.setValueAt(data.split(";")[i].split(",")[0], tableModel.getRowCount() - 1, 0);
@@ -51,6 +51,7 @@ public class ShowCollections extends javax.swing.JDialog {
         }
         else{
            JOptionPane.showMessageDialog(this, bundle.getString("sin_resultados"));
+           this.dispose();
         }
         
     }
@@ -70,6 +71,11 @@ public class ShowCollections extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("client/i18n/LabelsBundle"); // NOI18N
         setTitle(bundle.getString("show_colecciones")); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jTable1.setModel(tableModel);
@@ -80,6 +86,10 @@ public class ShowCollections extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(416, 308));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        sc.close();
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

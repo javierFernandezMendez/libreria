@@ -7,7 +7,10 @@ package client;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author chivu
@@ -64,8 +67,24 @@ public class ServerConnection {
         return null;
     }
     
-    public void close() throws IOException{
-        out.writeUTF("close");
+    public Object informe(String num){
+        try {
+            out.writeUTF("informe"+num);
+            return new ObjectInputStream(sc.getInputStream()).readObject();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
     
+    public void close(){
+        try {
+            out.writeUTF("close");
+            sc.close();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
 }

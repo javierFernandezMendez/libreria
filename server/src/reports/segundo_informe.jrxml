@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="segundo_informe" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc4b0ea7-303f-4eef-b0aa-927a7756f4f2">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MYSQL library data adapter"/>
+	<queryString language="SQL">
+		<![CDATA[select * from collection]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collection"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="collection"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="126" y="24" width="303" height="30" uuid="25de94aa-aa4a-4849-9a69-8211e52cce4b"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Informe colecciones almacenadas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="50">
+			<staticText>
+				<reportElement x="126" y="0" width="100" height="30" uuid="a169d375-2369-4051-8d9c-42f9d1c632f0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0046dd43-c94a-40f1-9162-d4e0ba479efa"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="0" width="100" height="30" uuid="ec83c080-cb67-4d2d-bab8-fe9906e4a5e9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8689113-5d86-4618-b5ba-d98e9be6c819"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement x="126" y="12" width="100" height="30" uuid="e64467e4-325b-424c-9595-e45b1bc15215">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0046dd43-c94a-40f1-9162-d4e0ba479efa"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="12" width="100" height="30" uuid="f9fde144-1806-4831-9ad7-3a0b0a091b1e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a8689113-5d86-4618-b5ba-d98e9be6c819"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="450" y="3" width="100" height="30" uuid="0344f337-d012-4025-871f-08806685ed57"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
