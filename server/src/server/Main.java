@@ -23,7 +23,7 @@ public class Main {
         Connection connection;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/library", "root", "root");
+            connection = java.sql.DriverManager.getConnection("jdbc:mysql://192.168.8.128:3306/library", "library", "library");
             ServerSocket socket = new ServerSocket(10);
             Server server = new Server(connection, socket);
         } catch (IOException ex) {

@@ -21,7 +21,7 @@ public class ServerConnection {
     private static DataInputStream in;
     
     public ServerConnection(int port) throws IOException {
-        sc = new Socket("127.0.0.1", port);
+        sc = new Socket("192.168.8.128", port);
         out = new DataOutputStream(sc.getOutputStream());
         in = new DataInputStream(sc.getInputStream());
         
