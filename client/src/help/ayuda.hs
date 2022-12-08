@@ -20,14 +20,6 @@
         <type>javax.help.FavoritesView</type>		
     </view>
 
-    <view>						
-        <name>Busqueda</name>
-        <label>Busqueda</label>	
-        <type>javax.help.SearchView</type>
-        <data engine="com.sun.java.help.search.DefaultSearchEngine">JavaHelpSearch</data>
-        		
-    </view>
-
     <presentation default="true" displayviews="true" displayviewimages="true">
         <name>MainWin</name>
         <size width="600" height="500"/>		
